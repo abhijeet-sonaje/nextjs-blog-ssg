@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { mdxToHtml } from '../../lib/mdx';
 import { MDXRemote } from 'next-mdx-remote';
-import Layout from '../../components/Layout';
+import Layout from '../layout';
 
 type Props = {
   params: { slug: string };
@@ -39,6 +39,7 @@ export default async function BlogPostPage({ params }: Props) {
   try {
     const source = await fs.readFile(postPath, 'utf8');
     const mdxSource = await mdxToHtml(source);
+    
 
     return (
       <Layout>
