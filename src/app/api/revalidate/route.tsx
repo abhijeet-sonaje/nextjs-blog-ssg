@@ -8,6 +8,12 @@ export async function GET(request: NextRequest) {
     return Response.json({ message: "Invalid token" });
   }
 
-  revalidatePath("/");
+  const path = request.nextUrl.searchParams.get("path");
+
+  if (path) {
+    revalidatePath("/posts/" + path);
+  } else {
+    revalidatePath("/");
+  }
   return Response.json({ revalidated: true, now: Date.now() });
 }
